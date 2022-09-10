@@ -9,6 +9,9 @@ python = "^3.9"
 pre-commit = "^2.20.0"
 PyAutoGUI = "^0.9.53"
 logzero = "^1.7.0"
+Pillow = "^9.2.0"
+click = "^8.1.3"
+numpy = "^1.23.3"
 
 [tool.poetry.dev-dependencies]
 

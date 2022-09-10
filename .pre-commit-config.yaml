@@ -24,5 +24,5 @@ repos:
   - id: flake8
     # max-line-length setting is the same as black
     # commit cannot be done when cyclomatic complexity is more than 10.
-    args: [--max-line-length, "128", --ignore=E402, --max-complexity, "10", --max-expression-complexity=7, --max-cognitive-complexity=7]
+    args: [--max-line-length, "128", --ignore=E402, --max-complexity, "10", --max-expression-complexity=8, --max-cognitive-complexity=8]
     additional_dependencies: [flake8-bugbear, flake8-builtins, flake8-eradicate, pep8-naming, flake8-expression-complexity, flake8-cognitive-complexity]
