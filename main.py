@@ -8,6 +8,7 @@ import numpy as np
 import pyautogui
 from PIL import Image
 
+from detect_edge import detect_edge
 from utils import get_logger
 
 logger = get_logger(__name__)
@@ -41,7 +42,7 @@ def check_same_image(dir_path: str, img_name: str, prev_name: str) -> bool:
     return (img == prev_img).all()
 
 
-def create_pdf(image_dir: str, pdf_dir: str, pdf_name: str):
+def create_pdf(image_dir: str, pdf_dir: str, pdf_name: str, left: int, right: int, height: int):
     files = glob.glob(os.path.join(image_dir, "*.jpg"))
     logger.info(f"detected {len(files)} pages")
     pdf_path = os.path.join(pdf_dir, pdf_name)
@@ -49,6 +50,7 @@ def create_pdf(image_dir: str, pdf_dir: str, pdf_name: str):
     for f in files:
         img = Image.open(f)
         img = img.convert("RGB")
+        img = img.crop((left, 0, right, height))
         images.append(img)
     images[0].save(pdf_path, save_all=True, append_images=images[1:])
     logger.info(f"saved_pdf to {pdf_path}")
@@ -89,8 +91,11 @@ def main(book_name: str, direction: str):
             ag.press_key("esc")
             break
 
+    logger.info("detect edge")
+    left, right, height = detect_edge(os.path.join(dir_name, img_name))
+
     logger.info("create pdf file")
-    create_pdf(dir_name, "./pdf/", f"{book_name}.pdf")
+    create_pdf(dir_name, "./pdf/", f"{book_name}.pdf", left, right, height)
 
 
 if __name__ == "__main__":
