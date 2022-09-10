@@ -7,6 +7,8 @@ authors = ["Your Name <you@example.com>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 pre-commit = "^2.20.0"
+PyAutoGUI = "^0.9.53"
+logzero = "^1.7.0"
 
 [tool.poetry.dev-dependencies]
 
